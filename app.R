@@ -14,6 +14,11 @@ library(tidyr)
 library(lubridate)
 library(plotly)
 
+####################
+### SHINY DEPLOY ###
+####################
+
+source('dataset.R)
 
 ####################
 ### SHINY DEPLOY ###
