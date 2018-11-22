@@ -18,7 +18,7 @@ library(plotly)
 ### DATASET ###
 ###############
 
-soure('dataset.R')
+source('dataset.R')
 
 ####################
 ### SHINY DEPLOY ###
