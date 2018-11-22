@@ -14,11 +14,11 @@ library(tidyr)
 library(lubridate)
 library(plotly)
 
-####################
-### SHINY DEPLOY ###
-####################
+###############
+### DATASET ###
+###############
 
-source('dataset.R)
+soure('dataset.R')
 
 ####################
 ### SHINY DEPLOY ###
@@ -304,11 +304,10 @@ server <- function(input, output) {
     renderPlotly({
       Base_pib1 <- base_pib1() %>% filter(date == max(date))
       plot_ly(Base_pib1, 
-              x = ~reference_year, y=~value) %>%
+              x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Crescimento Esperado do PIB',
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a')) %>%
-        add_trace(type = 'bar', hoverinfo = 'y')
+               yaxis = list(title = '% a.a'))
   
     })
 
@@ -326,11 +325,10 @@ server <- function(input, output) {
     renderPlotly({
       Base_pib2 <- base_pib2() %>% filter(reference_year==input$num_pib)
       plot_ly(Base_pib2, 
-              x = ~date, y=~value) %>%
+              x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
         layout(title = paste0('Crescimento Esperado para ',input$num_pib),
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a')) %>%
-        add_trace(type = 'scatter', mode = 'markers', hoverinfo = 'y')
+               yaxis = list(title = '% a.a')) 
       
     })
   
@@ -353,11 +351,10 @@ server <- function(input, output) {
     renderPlotly({
       Base_inflacao1 <- base_inflacao1() %>% filter(date == max(date))
       plot_ly(Base_inflacao1, 
-              x = ~reference_year, y=~value) %>%
+              x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Taxa Esperada de Infla\u00e7\u00e3o',
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a')) %>%
-        add_trace(type = 'bar', hoverinfo = 'y')
+               yaxis = list(title = '% a.a'))
       
     })
   
@@ -376,11 +373,10 @@ server <- function(input, output) {
       Base_inflacao2 <- base_inflacao2() %>% filter(reference_year==input$num_inflacao)
       plot_ly(
         Base_inflacao2, 
-        x = ~date, y=~value) %>%
+        x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
         layout(title = paste0('Taxa Esperada para ',input$num_inflacao),
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a')) %>%
-        add_trace(type = 'scatter', mode = 'markers', hoverinfo = 'y')
+               yaxis = list(title = '% a.a'))
   })
   
   dates_cambio <- reactiveValues()
@@ -402,11 +398,10 @@ server <- function(input, output) {
     renderPlotly({
       Base_cambio1 <- base_cambio1() %>% filter(date == max(date))
       plot_ly(Base_cambio1, 
-              x = ~reference_year, y=~value) %>%
+              x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Taxa Esperada do C\u00e2mbio',
                xaxis = list(title = ''),
-               yaxis = list(title = 'R$ / US$')) %>%
-        add_trace(type = 'bar', hoverinfo = 'y')
+               yaxis = list(title = 'R$ / US$'))
       
     })
   
@@ -425,11 +420,10 @@ server <- function(input, output) {
       Base_cambio2 <- base_cambio2() %>% filter(reference_year==input$num_cambio)
       plot_ly(
         Base_cambio2, 
-        x = ~date, y=~value) %>%
+        x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
         layout(title = paste0('Taxa Esperada para ',input$num_cambio),
                xaxis = list(title = ''),
-               yaxis = list(title = 'R$ / US$')) %>%
-        add_trace(type = 'scatter', mode = 'markers', hoverinfo = 'y')
+               yaxis = list(title = 'R$ / US$'))
     })
   
   dates_selic <- reactiveValues()
@@ -451,11 +445,10 @@ server <- function(input, output) {
     renderPlotly({
       Base_selic1 <- base_selic1() %>% filter(date == max(date))
       plot_ly(Base_selic1, 
-              x = ~reference_year, y=~value) %>%
+              x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Taxa Esperada da Selic',
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a')) %>%
-        add_trace(type = 'bar', hoverinfo = 'y')
+               yaxis = list(title = '% a.a'))
       
     })
   
@@ -474,11 +467,10 @@ server <- function(input, output) {
       Base_selic2 <- base_selic2() %>% filter(reference_year==input$num_selic)
       plot_ly(
         Base_selic2, 
-        x = ~date, y=~value) %>%
+        x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
         layout(title = paste0('Taxa Esperada para ',input$num_selic),
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a')) %>%
-        add_trace(type = 'scatter', mode = 'markers', hoverinfo = 'y')
+               yaxis = list(title = '% a.a'))
     })
   
   dates_balanca_comercial <- reactiveValues()
@@ -500,12 +492,10 @@ server <- function(input, output) {
     renderPlotly({
       Base_balanca_comercial1 <- base_balanca_comercial1() %>% filter(date == max(date))
       plot_ly(Base_balanca_comercial1, 
-              x = ~reference_year, y=~value) %>%
+              x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Valor Esperado da Balan\u00e7a Comercial',
                xaxis = list(title = ''),
-               yaxis = list(title = 'US$ (em bilh\u00f5es)')) %>%
-        add_trace(type = 'bar', hoverinfo = 'y')
-      
+               yaxis = list(title = 'US$ (em bilh\u00f5es)'))
     })
   
   base_balanca_comercial2 <- reactive({
@@ -523,14 +513,12 @@ server <- function(input, output) {
       Base_balanca_comercial2 <- base_balanca_comercial2() %>% filter(reference_year==input$num_balanca_comercial)
       plot_ly(
         Base_balanca_comercial2, 
-        x = ~date, y=~value) %>%
+        x = ~date, y=~value, type='scatter', mode = 'markers') %>%
         layout(title = paste0('Valor Esperado da Balan\u00e7a Comercial para ',input$num_balanca_comercial),
                xaxis = list(title = ''),
-               yaxis = list(title = 'US$ (em bilh\u00f5es)')) %>%
-        add_trace(type = 'scatter', mode = 'markers', hoverinfo = 'y')
+               yaxis = list(title = 'US$ (em bilh\u00f5es)'))
     })
 }
   
 
 shinyApp(ui, server)
- 
