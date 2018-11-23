@@ -295,14 +295,14 @@ server <- function(input, output) {
     pib %>%
       select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic,date,reference_year)) %>%
-      filter(indic==input$indic_pib,
+      dplyr::filter(indic==input$indic_pib,
              metric == input$metrica_pib,
              date >= input$data_pib[1] & date <= input$data_pib[2])
   })
   
   output$Graf_PIB1 <- 
     renderPlotly({
-      Base_pib1 <- base_pib1() %>% filter(date == max(date))
+      Base_pib1 <- base_pib1() %>% dplyr::filter(date == max(date))
       plot_ly(Base_pib1, 
               x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Crescimento Esperado do PIB',
@@ -315,7 +315,7 @@ server <- function(input, output) {
     pib %>%
       select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic,date,reference_year)) %>%
-      filter(indic==input$indic_pib,
+      dplyr::filter(indic==input$indic_pib,
              reference_year==input$num_pib,
              metric == input$metrica_pib,
              date >= input$data_pib[1] & date <= input$data_pib[2])
@@ -323,7 +323,7 @@ server <- function(input, output) {
   
   output$Graf_PIB2 <- 
     renderPlotly({
-      Base_pib2 <- base_pib2() %>% filter(reference_year==input$num_pib)
+      Base_pib2 <- base_pib2() %>% dplyr::filter(reference_year==input$num_pib)
       plot_ly(Base_pib2, 
               x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
         layout(title = paste0('Crescimento Esperado para ',input$num_pib),
@@ -342,14 +342,14 @@ server <- function(input, output) {
     inflacao %>%
       select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic,date,reference_year)) %>%
-      filter(indic==input$indic_inflacao,
+      dplyr::filter(indic==input$indic_inflacao,
              metric == input$metrica_inflacao,
              date >= input$data_inflacao[1] & date <= input$data_inflacao[2])
   })
   
   output$Graf_Inflacao1 <- 
     renderPlotly({
-      Base_inflacao1 <- base_inflacao1() %>% filter(date == max(date))
+      Base_inflacao1 <- base_inflacao1() %>% dplyr::filter(date == max(date))
       plot_ly(Base_inflacao1, 
               x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Taxa Esperada de Infla\u00e7\u00e3o',
@@ -362,7 +362,7 @@ server <- function(input, output) {
     inflacao %>%
       select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic,date,reference_year)) %>%
-      filter(indic==input$indic_inflacao,
+      dplyr::filter(indic==input$indic_inflacao,
              reference_year==input$num_inflacao,
              metric == input$metrica_inflacao,
              date >= input$data_inflacao[1] & date <= input$data_inflacao[2])
@@ -370,7 +370,7 @@ server <- function(input, output) {
   
   output$Graf_Inflacao2 <- 
     renderPlotly({
-      Base_inflacao2 <- base_inflacao2() %>% filter(reference_year==input$num_inflacao)
+      Base_inflacao2 <- base_inflacao2() %>% dplyr::filter(reference_year==input$num_inflacao)
       plot_ly(
         Base_inflacao2, 
         x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
@@ -389,14 +389,14 @@ server <- function(input, output) {
     cambio %>%
       select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
-      filter(indic_detail==input$indic_cambio,
+      dplyr::filter(indic_detail==input$indic_cambio,
              metric == input$metrica_cambio,
              date >= input$data_cambio[1] & date <= input$data_cambio[2])
   })
   
   output$Graf_Cambio1 <- 
     renderPlotly({
-      Base_cambio1 <- base_cambio1() %>% filter(date == max(date))
+      Base_cambio1 <- base_cambio1() %>% dplyr::filter(date == max(date))
       plot_ly(Base_cambio1, 
               x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Taxa Esperada do C\u00e2mbio',
@@ -409,7 +409,7 @@ server <- function(input, output) {
     cambio %>%
       select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
-      filter(indic_detail==input$indic_cambio,
+      dplyr::filter(indic_detail==input$indic_cambio,
              reference_year==input$num_cambio,
              metric == input$metrica_cambio,
              date >= input$data_cambio[1] & date <= input$data_cambio[2])
@@ -417,7 +417,7 @@ server <- function(input, output) {
   
   output$Graf_Cambio2 <- 
     renderPlotly({
-      Base_cambio2 <- base_cambio2() %>% filter(reference_year==input$num_cambio)
+      Base_cambio2 <- base_cambio2() %>% dplyr::filter(reference_year==input$num_cambio)
       plot_ly(
         Base_cambio2, 
         x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
@@ -436,14 +436,14 @@ server <- function(input, output) {
     selic %>%
       select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
-      filter(indic_detail==input$indic_selic,
+      dplyr::filter(indic_detail==input$indic_selic,
              metric == input$metrica_selic,
              date >= input$data_selic[1] & date <= input$data_selic[2])
   })
   
   output$Graf_Selic1 <- 
     renderPlotly({
-      Base_selic1 <- base_selic1() %>% filter(date == max(date))
+      Base_selic1 <- base_selic1() %>% dplyr::filter(date == max(date))
       plot_ly(Base_selic1, 
               x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Taxa Esperada da Selic',
@@ -456,7 +456,7 @@ server <- function(input, output) {
     selic %>%
       select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
-      filter(indic_detail==input$indic_selic,
+      dplyr::filter(indic_detail==input$indic_selic,
              reference_year==input$num_selic,
              metric == input$metrica_selic,
              date >= input$data_selic[1] & date <= input$data_selic[2])
@@ -464,7 +464,7 @@ server <- function(input, output) {
   
   output$Graf_Selic2 <- 
     renderPlotly({
-      Base_selic2 <- base_selic2() %>% filter(reference_year==input$num_selic)
+      Base_selic2 <- base_selic2() %>% dplyr::filter(reference_year==input$num_selic)
       plot_ly(
         Base_selic2, 
         x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
@@ -483,14 +483,14 @@ server <- function(input, output) {
     balanca_comercial %>%
       select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
-      filter(indic_detail==input$indic_balanca_comercial,
+      dplyr::filter(indic_detail==input$indic_balanca_comercial,
              metric == input$metrica_balanca_comercial,
              date >= input$data_balanca_comercial[1] & date <= input$data_balanca_comercial[2])
   })
   
   output$Graf_Balanca_Comercial1 <- 
     renderPlotly({
-      Base_balanca_comercial1 <- base_balanca_comercial1() %>% filter(date == max(date))
+      Base_balanca_comercial1 <- base_balanca_comercial1() %>% dplyr::filter(date == max(date))
       plot_ly(Base_balanca_comercial1, 
               x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Valor Esperado da Balan\u00e7a Comercial',
@@ -502,7 +502,7 @@ server <- function(input, output) {
     balanca_comercial %>%
       select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
-      filter(indic_detail==input$indic_balanca_comercial,
+      dplyr::filter(indic_detail==input$indic_balanca_comercial,
              reference_year==input$num_balanca_comercial,
              metric == input$metrica_balanca_comercial,
              date >= input$data_balanca_comercial[1] & date <= input$data_balanca_comercial[2])
@@ -510,7 +510,7 @@ server <- function(input, output) {
   
   output$Graf_Balanca_Comercial2 <- 
     renderPlotly({
-      Base_balanca_comercial2 <- base_balanca_comercial2() %>% filter(reference_year==input$num_balanca_comercial)
+      Base_balanca_comercial2 <- base_balanca_comercial2() %>% dplyr::filter(reference_year==input$num_balanca_comercial)
       plot_ly(
         Base_balanca_comercial2, 
         x = ~date, y=~value, type='scatter', mode = 'markers') %>%
