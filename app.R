@@ -264,15 +264,8 @@ ui <- dashboardPage(skin = 'blue',
               h1('Sobre'),
               h3(HTML('Esse painel foi produzido pela Unidade de Gest\u00e3o Estrat\u00e9gica do Sebrae Nacional. 
                      <br> Foi utilizada a linguagem de programa\u00e7\u00e3o R para a manipula\u00e7\u00e3o dos dados. A publica\u00e7\u00e3o do painel ocorreu por meio da biblioteca Shiny.')),
-              h1('Equipe'),
-              h3(HTML('- Alexandre Lima 
-                  <br>- Ananda S\u00e1
-                  <br>- Aretha Zarlenga
-                  <br>- Luiz Hissashi
-                  <br>- J\u00e9ssica Lakiss
-                  <br>- Karina Souza
-                  <br>- Pedro Souza
-                  <br>- Tomaz Carrijo'))
+              h1('Responsável'),
+              h3(HTML('- Alexandre Lima'))
               )
     )
   )
@@ -304,10 +297,11 @@ server <- function(input, output) {
     renderPlotly({
       Base_pib1 <- base_pib1() %>% dplyr::filter(date == max(date))
       plot_ly(Base_pib1, 
-              x = ~reference_year, y=~value, type = 'bar') %>%
+              x = ~reference_year, y=~value, mode = 'bar') %>%
         layout(title = 'Crescimento Esperado do PIB',
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a'))
+               yaxis = list(title = '% a.a')) %>%
+        config(displayModeBar = F)
   
     })
 
@@ -325,10 +319,11 @@ server <- function(input, output) {
     renderPlotly({
       Base_pib2 <- base_pib2() %>% dplyr::filter(reference_year==input$num_pib)
       plot_ly(Base_pib2, 
-              x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
+              x = ~date, y=~value, mode = 'lines') %>%
         layout(title = paste0('Crescimento Esperado para ',input$num_pib),
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a')) 
+               yaxis = list(title = '% a.a')) %>%
+        config(displayModeBar = F)
       
     })
   
@@ -354,7 +349,8 @@ server <- function(input, output) {
               x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Taxa Esperada de Infla\u00e7\u00e3o',
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a'))
+               yaxis = list(title = '% a.a')) %>%
+        config(displayModeBar = F)
       
     })
   
@@ -373,10 +369,11 @@ server <- function(input, output) {
       Base_inflacao2 <- base_inflacao2() %>% dplyr::filter(reference_year==input$num_inflacao)
       plot_ly(
         Base_inflacao2, 
-        x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
+        x = ~date, y=~value, mode = 'lines') %>%
         layout(title = paste0('Taxa Esperada para ',input$num_inflacao),
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a'))
+               yaxis = list(title = '% a.a')) %>%
+        config(displayModeBar = F)
   })
   
   dates_cambio <- reactiveValues()
@@ -401,7 +398,8 @@ server <- function(input, output) {
               x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Taxa Esperada do C\u00e2mbio',
                xaxis = list(title = ''),
-               yaxis = list(title = 'R$ / US$'))
+               yaxis = list(title = 'R$ / US$')) %>%
+        config(displayModeBar = F)
       
     })
   
@@ -420,10 +418,11 @@ server <- function(input, output) {
       Base_cambio2 <- base_cambio2() %>% dplyr::filter(reference_year==input$num_cambio)
       plot_ly(
         Base_cambio2, 
-        x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
+        x = ~date, y=~value, mode = 'lines') %>%
         layout(title = paste0('Taxa Esperada para ',input$num_cambio),
                xaxis = list(title = ''),
-               yaxis = list(title = 'R$ / US$'))
+               yaxis = list(title = 'R$ / US$')) %>%
+        config(displayModeBar = F)
     })
   
   dates_selic <- reactiveValues()
@@ -448,7 +447,8 @@ server <- function(input, output) {
               x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Taxa Esperada da Selic',
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a'))
+               yaxis = list(title = '% a.a')) %>%
+        config(displayModeBar = F)
       
     })
   
@@ -467,10 +467,11 @@ server <- function(input, output) {
       Base_selic2 <- base_selic2() %>% dplyr::filter(reference_year==input$num_selic)
       plot_ly(
         Base_selic2, 
-        x = ~date, y=~value, type = 'scatter', mode = 'markers') %>%
+        x = ~date, y=~value, mode = 'lines') %>%
         layout(title = paste0('Taxa Esperada para ',input$num_selic),
                xaxis = list(title = ''),
-               yaxis = list(title = '% a.a'))
+               yaxis = list(title = '% a.a')) %>%
+        config(displayModeBar = F)
     })
   
   dates_balanca_comercial <- reactiveValues()
@@ -495,7 +496,8 @@ server <- function(input, output) {
               x = ~reference_year, y=~value, type = 'bar') %>%
         layout(title = 'Valor Esperado da Balan\u00e7a Comercial',
                xaxis = list(title = ''),
-               yaxis = list(title = 'US$ (em bilh\u00f5es)'))
+               yaxis = list(title = 'US$ (em bilh\u00f5es)')) %>%
+        config(displayModeBar = F)
     })
   
   base_balanca_comercial2 <- reactive({
@@ -513,12 +515,14 @@ server <- function(input, output) {
       Base_balanca_comercial2 <- base_balanca_comercial2() %>% dplyr::filter(reference_year==input$num_balanca_comercial)
       plot_ly(
         Base_balanca_comercial2, 
-        x = ~date, y=~value, type='scatter', mode = 'markers') %>%
+        x = ~date, y=~value, mode = 'lines') %>%
         layout(title = paste0('Valor Esperado da Balan\u00e7a Comercial para ',input$num_balanca_comercial),
                xaxis = list(title = ''),
-               yaxis = list(title = 'US$ (em bilh\u00f5es)'))
+               yaxis = list(title = 'US$ (em bilh\u00f5es)')) %>%
+        config(displayModeBar = F)
     })
 }
   
 
 shinyApp(ui, server)
+  
