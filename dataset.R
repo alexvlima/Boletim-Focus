@@ -142,7 +142,6 @@ rm(temp,i,indic_pib,data_inicio)
 indic_inflacao <- c('IGP-DI','IGP-M','INPC','IPA-DI', 'IPA-M','IPCA', 'IPCA-15','Pre\u00e7os administrados por contrato e monitorados')
 data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
 
-
 inflacao <- data.frame()
 
 for (i in 1:length(indic_inflacao)){
@@ -151,6 +150,11 @@ for (i in 1:length(indic_inflacao)){
   inflacao <- bind_rows(inflacao,temp)
   
 }
+
+inflacao <- 
+  inflacao %>%
+  arrange(indic, desc(date), reference_year) %>%
+  distinct(indic, date, reference_year, .keep_all = T)
 
 rm(temp,i,indic_inflacao,data_inicio)
 
