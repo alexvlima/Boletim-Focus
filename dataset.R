@@ -2,8 +2,8 @@
 ### BIBLIOTECAS ###
 ###################
 
-library(dplyr)
-
+library(tidyverse)
+library(lubridate)
 
 ##########################
 ### BACEN API FUNCTION ###
@@ -121,7 +121,7 @@ annual_market_expectations_url <- function(indic, start_date, end_date, ...) {
 ###################
 
 indic_pib <- c('Produ\u00e7\u00e3o industrial', 'PIB Agropecu\u00e1ria', 'PIB Industrial', 'PIB Servi\u00e7os', 'PIB Total')
-data_inicio <- '2018-01-01'
+data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
 
 pib <- data.frame()
 
@@ -140,7 +140,8 @@ rm(temp,i,indic_pib,data_inicio)
 ################
 
 indic_inflacao <- c('IGP-DI','IGP-M','INPC','IPA-DI', 'IPA-M','IPCA', 'IPCA-15','Pre\u00e7os administrados por contrato e monitorados')
-data_inicio <- '2018-01-01'
+data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
+
 
 inflacao <- data.frame()
 
@@ -159,7 +160,7 @@ rm(temp,i,indic_inflacao,data_inicio)
 ######################
 
 indic_cambio <- 'Taxa de c\u00e2mbio'
-data_inicio <- '2018-01-01'
+data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
 
 cambio <- get_annual_market_expectations(indic_cambio, start_date = data_inicio)
 
@@ -183,7 +184,7 @@ rm(indic_selic, data_inicio)
 #########################
 
 indic_balanca_comercial <- 'Balan\u00e7a Comercial'
-data_inicio <- '2018-01-01'
+data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
 
 balanca_comercial <- get_annual_market_expectations(indic_balanca_comercial, start_date = data_inicio)
 
@@ -195,7 +196,7 @@ rm(indic_balanca_comercial, data_inicio)
 ##########################
 
 indic_balanco_pagamentos <- 'Balan\u00e7o de Pagamentos'
-data_inicio <- '2018-01-01'
+data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
 
 balanco_pagamentos <- get_annual_market_expectations(indic_balanco_pagamentos, start_date = data_inicio)
 
@@ -207,9 +208,8 @@ rm(indic_balanco_pagamentos, data_inicio)
 ##################
 
 indic_fiscal <- 'Fiscal'
-data_inicio <- '2018-01-01'
+data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
 
 fiscal <- get_annual_market_expectations(indic_fiscal, start_date = data_inicio)
 
 rm(indic_fiscal, data_inicio)
-
