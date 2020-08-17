@@ -5,6 +5,9 @@ Aplicação com as informações disponíveis no Boletim Focus (BACEN). O Boleti
 A aplicação foi feita em R e os scripts foram divididos em:
 
 ### 1) Dataset: função para obter os dados
+
+Usou a função feito pelo Wilson Freitas, pacote rbcb (https://github.com/wilsonfreitas/rbcb) para obter via API os dados do Boletim Focus. 
+
 ### 2) Shiny: app em shiny
 
-O App está publicado em alexvlima.shinyapps.io/Boletim-Focus
+O App está publicado em alexvlima.shinyapps.io/BoletimFocus
