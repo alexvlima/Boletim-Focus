@@ -10,4 +10,4 @@ Usou a função feito pelo Wilson Freitas, pacote rbcb (https://github.com/wilso
 
 ### 2) Shiny: app em shiny
 
-O App está publicado em alexvlima.shinyapps.io/BoletimFocus
+O App está publicado em https://alexvlima.shinyapps.io/BoletimFocus
