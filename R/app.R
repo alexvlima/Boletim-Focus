@@ -285,7 +285,7 @@ server <- function(input, output) {
   
   base_pib1 <- reactive({
     pib %>%
-      select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
+      dplyr::select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic,date,reference_year)) %>%
       dplyr::filter(indic==input$indic_pib,
                     metric == input$metrica_pib,
@@ -306,7 +306,7 @@ server <- function(input, output) {
   
   base_pib2 <- reactive({
     pib %>%
-      select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
+      dplyr::select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic,date,reference_year)) %>%
       dplyr::filter(indic==input$indic_pib,
                     reference_year==input$num_pib,
@@ -334,7 +334,7 @@ server <- function(input, output) {
   
   base_inflacao1 <- reactive({
     inflacao %>%
-      select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
+      dplyr::select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic,date,reference_year)) %>%
       dplyr::filter(indic==input$indic_inflacao,
                     metric == input$metrica_inflacao,
@@ -355,7 +355,7 @@ server <- function(input, output) {
   
   base_inflacao2 <- reactive({
     inflacao %>%
-      select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
+      dplyr::select(indic,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic,date,reference_year)) %>%
       dplyr::filter(indic==input$indic_inflacao,
                     reference_year==input$num_inflacao,
@@ -383,7 +383,7 @@ server <- function(input, output) {
   
   base_cambio1 <- reactive({
     cambio %>%
-      select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
+      dplyr::select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
       dplyr::filter(indic_detail==input$indic_cambio,
                     metric == input$metrica_cambio,
@@ -404,7 +404,7 @@ server <- function(input, output) {
   
   base_cambio2 <- reactive({
     cambio %>%
-      select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
+      dplyr::select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
       dplyr::filter(indic_detail==input$indic_cambio,
                     reference_year==input$num_cambio,
@@ -432,7 +432,7 @@ server <- function(input, output) {
   
   base_selic1 <- reactive({
     selic %>%
-      select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
+      dplyr::select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
       dplyr::filter(indic_detail==input$indic_selic,
                     metric == input$metrica_selic,
@@ -453,7 +453,7 @@ server <- function(input, output) {
   
   base_selic2 <- reactive({
     selic %>%
-      select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
+      dplyr::select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
       dplyr::filter(indic_detail==input$indic_selic,
                     reference_year==input$num_selic,
@@ -481,7 +481,7 @@ server <- function(input, output) {
   
   base_balanca_comercial1 <- reactive({
     balanca_comercial %>%
-      select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
+      dplyr::select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
       dplyr::filter(indic_detail==input$indic_balanca_comercial,
                     metric == input$metrica_balanca_comercial,
@@ -501,7 +501,7 @@ server <- function(input, output) {
   
   base_balanca_comercial2 <- reactive({
     balanca_comercial %>%
-      select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
+      dplyr::select(indic_detail,date,reference_year, mean, median, min, max, sd, coefvar) %>%
       gather("metric", "value", -c(indic_detail,date,reference_year)) %>%
       dplyr::filter(indic_detail==input$indic_balanca_comercial,
                     reference_year==input$num_balanca_comercial,
