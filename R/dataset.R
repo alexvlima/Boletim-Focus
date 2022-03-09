@@ -1,8 +1,8 @@
-##################
-### BACEN API  ###
-##################
+##############
+### SOURCE ###
+##############
 
-source("Function/API_Bacen.R")
+source("../Documents/Pessoal/proxy.R")
 
 ###################
 ### BIBLIOTECAS ###
@@ -10,6 +10,7 @@ source("Function/API_Bacen.R")
 
 library(tidyverse)
 library(lubridate)
+library(rbcb)
 
 ###################
 ### PIB - FOCUS ###
@@ -26,6 +27,11 @@ for (i in 1:length(indic_pib)){
   pib <- bind_rows(pib,temp)
   
 }
+
+pib <- 
+  pib %>%
+  arrange(indic, desc(date), reference_date) %>%
+  distinct(indic, date, reference_date, .keep_all = T)
 
 rm(temp,i,indic_pib,data_inicio)
 
@@ -47,8 +53,8 @@ for (i in 1:length(indic_inflacao)){
 
 inflacao <- 
   inflacao %>%
-  arrange(indic, desc(date), reference_year) %>%
-  distinct(indic, date, reference_year, .keep_all = T)
+  arrange(indic, desc(date), reference_date) %>%
+  distinct(indic, date, reference_date, .keep_all = T)
 
 rm(temp,i,indic_inflacao,data_inicio)
 
@@ -56,10 +62,15 @@ rm(temp,i,indic_inflacao,data_inicio)
 ### CÂMBIO - FOCUS ###
 ######################
 
-indic_cambio <- 'Taxa de c\u00e2mbio'
+indic_cambio <- 'Câmbio'
 data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
 
 cambio <- get_annual_market_expectations(indic_cambio, start_date = data_inicio)
+
+cambio <- 
+  cambio %>%
+  arrange(indic, desc(date), reference_date) %>%
+  distinct(indic, date, reference_date, .keep_all = T)
 
 rm(indic_cambio, data_inicio)
 
@@ -67,10 +78,15 @@ rm(indic_cambio, data_inicio)
 ### SELIC - FOCUS ###
 #####################
 
-indic_selic <- 'Meta para taxa over-selic'
-data_inicio <- '2018-01-01'
+indic_selic <- 'Selic'
+data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
 
 selic <- get_annual_market_expectations(indic_selic, start_date = data_inicio)
+
+selic <- 
+  selic %>%
+  arrange(indic, desc(date), reference_date) %>%
+  distinct(indic, date, reference_date, .keep_all = T)
 
 rm(indic_selic, data_inicio)
 
@@ -78,31 +94,31 @@ rm(indic_selic, data_inicio)
 ### BALANÇA COMERCIAL ###
 #########################
 
-indic_balanca_comercial <- 'Balan\u00e7a Comercial'
-data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
+# indic_balanca_comercial <- 'Balança Comercial'
+# data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
+# 
+# balanca_comercial <- get_annual_market_expectations(indic_balanca_comercial, start_date = data_inicio)
+# 
+# rm(indic_balanca_comercial, data_inicio)
 
-balanca_comercial <- get_annual_market_expectations(indic_balanca_comercial, start_date = data_inicio)
-
-rm(indic_balanca_comercial, data_inicio)
-
-##########################
-### BALANÇO PAGAMENTOS ###
-##########################
-
-indic_balanco_pagamentos <- 'Balan\u00e7o de Pagamentos'
-data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
-
-balanco_pagamentos <- get_annual_market_expectations(indic_balanco_pagamentos, start_date = data_inicio)
-
-rm(indic_balanco_pagamentos, data_inicio)
-
-##################
-### SIT FISCAL ###
-##################
-
-indic_fiscal <- 'Fiscal'
-data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
-
-fiscal <- get_annual_market_expectations(indic_fiscal, start_date = data_inicio)
-
-rm(indic_fiscal, data_inicio)
+# ##########################
+# ### BALANÇO PAGAMENTOS ###
+# ##########################
+# 
+# indic_balanco_pagamentos <- 'Balan\u00e7o de Pagamentos'
+# data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
+# 
+# balanco_pagamentos <- get_annual_market_expectations(indic_balanco_pagamentos, start_date = data_inicio)
+# 
+# rm(indic_balanco_pagamentos, data_inicio)
+# 
+# ##################
+# ### SIT FISCAL ###
+# ##################
+# 
+# indic_fiscal <- 'Fiscal'
+# data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
+# 
+# fiscal <- get_annual_market_expectations(indic_fiscal, start_date = data_inicio)
+# 
+# rm(indic_fiscal, data_inicio)
