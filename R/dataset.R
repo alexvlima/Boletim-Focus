@@ -1,8 +1,4 @@
-##############
-### SOURCE ###
-##############
 
-source("../Documents/Pessoal/proxy.R")
 
 ###################
 ### BIBLIOTECAS ###
@@ -22,11 +18,12 @@ data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
 pib <- data.frame()
 
 for (i in 1:length(indic_pib)){
-  temp <- get_annual_market_expectations(indic_pib[i],
+  temp <- get_market_expectations("annual", indic_pib[i],
                                          start_date = data_inicio)
   pib <- bind_rows(pib,temp)
   
 }
+
 
 pib <- 
   pib %>%
@@ -45,7 +42,7 @@ data_inicio <- paste0(year(Sys.Date())-1,'-01-01')
 inflacao <- data.frame()
 
 for (i in 1:length(indic_inflacao)){
-  temp <- get_annual_market_expectations(indic_inflacao[i],
+  temp <- rbcb::get_annual_market_expectations(indic_inflacao[i],
                                          start_date = data_inicio)
   inflacao <- bind_rows(inflacao,temp)
   
